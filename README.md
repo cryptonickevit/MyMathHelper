@@ -24,15 +24,19 @@ Your program MUST handle invalid inputs by printing the INVALID_MENU_SELECTION m
 
 **Sample Output 1
 **
+
 Welcome to My Math Helper! Please Select an Operation 1 - Calculate Greatest Common Denominator 2 - Perform Prime Factorization 3 - Exit [1] Ready to Calculate Greatest Common Denominator Please Enter an Integer [8] Please Enter a Second Integer [12] The Greatest Common Denominator is 4 Please Select an Operation 1 - Calculate Greatest Common Denominator 2 - Perform Prime Factorization 3 - Exit [3] Thank you for using My Math Helper!
 
 **Sample Output 2**
+
 Welcome to My Math Helper! Please Select an Operation 1 - Calculate Greatest Common Denominator 2 - Perform Prime Factorization 3 - Exit [2] Ready to Perform Prime Factorization Please Enter an Integer [36] The Prime Factorization is 2 x 2 x 3 x 3 Please Select an Operation 1 - Calculate Greatest Common Denominator 2 - Perform Prime Factorization 3 - Exit [3] Thank you for using My Math Helper!
 
 **Sample Output 3** 
+
 Welcome to My Math Helper! Please Select an Operation 1 - Calculate Greatest Common Denominator 2 - Perform Prime Factorization 3 - Exit [2] Ready to Perform Prime Factorization Please Enter an Integer [1] Invalid Input - Returning to Main Menu Please Select an Operation 1 - Calculate Greatest Common Denominator 2 - Perform Prime Factorization 3 - Exit [3] Thank you for using My Math Helper!
 
 **Sample Output 4**
+
 Welcome to My Math Helper! Please Select an Operation 1 - Calculate Greatest Common Denominator 2 - Perform Prime Factorization 3 - Exit [wrong] Invalid selection! Please Select an Operation 1 - Calculate Greatest Common Denominator 2 - Perform Prime Factorization 3 - Exit [5] Invalid selection! Please Select an Operation 1 - Calculate Greatest Common Denominator 2 - Perform Prime Factorization 3 - Exit [3] Thank you for using My Math Helper!
 
 **Submit**
