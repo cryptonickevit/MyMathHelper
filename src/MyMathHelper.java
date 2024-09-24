@@ -34,15 +34,25 @@ public class MyMathHelper {
         }
     }
 
-    public int Exponent(int number, int exponent) {
+    public int GCDresult(int number, int exponent) {
         if (exponent == 0) return 1; // Any number to the power of 0 is 1
 
         int result = number;
 
-        for (int i = 0; i < exponent; i++) {
+        for (int i = 0; i < exponent-1; i++) {
             result *= number;
         }
         return result;
+    }
+
+    public int PFresult(int number, int exponent) {
+        if (exponent == 0) return 1; // Any number to the power of 0 is 1
+
+
+        for (int i = 0; i < exponent-1; i++) {
+            System.out.print(number);
+        }
+        return number;
     }
 
 
@@ -64,6 +74,10 @@ public class MyMathHelper {
         do{
             switch (scan1){
                 case "1":
+                    integer1.twoCounter = 0;
+                    integer1.threeCounter = 0;
+                    integer2.threeCounter = 0;
+                    integer2.twoCounter = 0;
                     System.out.println(GCD_NOTIFICATION); // GCD Calculation
                     System.out.println(INPUT_ONE);
                     int scan2 = scan.nextInt();
@@ -74,39 +88,47 @@ public class MyMathHelper {
                     if (integer1.twoCounter < integer2.twoCounter) {
                         integer2.twoCounter = integer1.twoCounter;
                     }
-                    else if (integer1.twoCounter >= integer2.twoCounter){
+                    else {
                         integer1.twoCounter = integer2.twoCounter;
-                    }
-                    else{
-                        integer1.twoCounter = 0;
-                        integer2.twoCounter = 0;
                     }
 
                     if (integer1.threeCounter < integer2.threeCounter) {
                         integer2.threeCounter = integer1.threeCounter;
                     }
-                    else if (integer1.threeCounter >= integer2.threeCounter){
+                    else {
                         integer1.threeCounter = integer2.threeCounter;
                     }
-                    else{
-                        integer1.threeCounter = 0;
-                        integer2.threeCounter = 0;
-                    }
-
-                    System.out.println(integer2.twoCounter);
                     System.out.println(integer2.threeCounter);
-                    System.out.println(integer2.Exponent(2, integer1.twoCounter));
-                    System.out.println(integer2.Exponent(3, integer2.twoCounter));
+                    int GCD = integer2.GCDresult(2, integer2.twoCounter) * integer2.GCDresult(3, integer2.threeCounter);
 
-
-
-
-
-
-
+                    System.out.println(GCD_OUTPUT + GCD);
                     break;
                 case "2":
-                    System.out.println(PF_NOTIFICATION); // Prime Factorization Calculation
+                    integer1.twoCounter = 0;
+                    integer1.threeCounter = 0;
+                    integer2.threeCounter = 0;
+                    integer2.twoCounter = 0;
+                    System.out.println(PF_NOTIFICATION);
+                    System.out.println(INPUT_ONE);
+                    int scan4 = scan.nextInt();
+                    System.out.println(INPUT_TWO);
+                    int scan5 = scan.nextInt();
+                    integer1.FactorFinder(scan4);
+                    integer2.FactorFinder(scan5);
+                    if (integer1.twoCounter < integer2.twoCounter) {
+                        integer2.twoCounter = integer1.twoCounter;
+                    }
+                    else {
+                        integer1.twoCounter = integer2.twoCounter;
+                    }
+
+                    if (integer1.threeCounter < integer2.threeCounter) {
+                        integer2.threeCounter = integer1.threeCounter;
+                    }
+                    else {
+                        integer1.threeCounter = integer2.threeCounter;
+                    }
+                    System.out.println(integer2.PFresult(2, integer2.twoCounter) + integer2.PFresult(3, integer2.threeCounter));
                     break;
                 case "3":
                     test = false;
