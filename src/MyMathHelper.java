@@ -1,12 +1,9 @@
 import java.util.Scanner;
 
-//Javadoc goes here
-
+/**
+ * This class provides methods to calculate the GCD and perform prime factorization.
+ */
 public class MyMathHelper {
-    int twoCounter = 0;
-    int threeCounter = 0;
-
-
     public static final String WELCOME_MESSAGE = "Welcome to My Math Helper!";
     public static final String MAIN_MENU_ONE = "Please Select an Operation";
     public static final String MAIN_MENU_TWO = "1 - Calculate Greatest Common Denominator";
@@ -22,124 +19,96 @@ public class MyMathHelper {
     public static final String INVALID_MENU_SELECTION = "Invalid selection!";
     public static final String INVALID_INPUT = "Invalid Input - Returning to Main Menu";
 
-
-    void FactorFinder(int value){
-        while (value % 2 == 0) {
-            value /= 2;
-            this.twoCounter++;
+    // Method for finding GCD using the Euclidean algorithm
+    public int calculateGCD(int num1, int num2) {
+        while (num2 != 0) {
+            int temp = num2;
+            num2 = num1 % num2;
+            num1 = temp;
         }
-        while (value % 3 == 0) {
-            value /= 3;
-            this.threeCounter++;
-        }
+        return num1;
     }
 
-    public int GCDresult(int number, int exponent) {
-        if (exponent == 0) return 1; // Any number to the power of 0 is 1
-
-        int result = number;
-
-        for (int i = 0; i < exponent-1; i++) {
-            result *= number;
+    // Method for performing prime factorization
+    public void performPrimeFactorization(int number) {
+        System.out.print(PF_OUTPUT);
+        // Handle 2 as a special case
+        while (number % 2 == 0) {
+            System.out.print(2 + " x ");
+            number /= 2;
         }
-        return result;
-    }
-
-    public int PFresult(int number, int exponent) {
-        if (exponent == 0) return 1; // Any number to the power of 0 is 1
-
-
-        for (int i = 0; i < exponent-1; i++) {
+        // Handle odd numbers
+        for (int i = 3; i <= Math.sqrt(number); i += 2) {
+            while (number % i == 0) {
+                System.out.print(i + " x ");
+                number /= i;
+            }
+        }
+        // If the remaining number is a prime greater than 2
+        if (number > 2) {
             System.out.print(number);
         }
-        return number;
+        System.out.println();
     }
 
-
     public static void main(String[] args) {
-        boolean test = true;
+        boolean continueProgram = true;
         Scanner scan = new Scanner(System.in);
 
         System.out.println(WELCOME_MESSAGE);
-        System.out.println(MAIN_MENU_ONE);
-        System.out.println(MAIN_MENU_TWO);
-        System.out.println(MAIN_MENU_THREE);
-        System.out.println(MAIN_MENU_FOUR);
 
-        MyMathHelper integer2 = new MyMathHelper();
-        MyMathHelper integer1 = new MyMathHelper();
+        MyMathHelper helper = new MyMathHelper();
 
-        String scan1 = scan.nextLine();
+        do {
+            System.out.println(MAIN_MENU_ONE);
+            System.out.println(MAIN_MENU_TWO);
+            System.out.println(MAIN_MENU_THREE);
+            System.out.println(MAIN_MENU_FOUR);
 
-        do{
-            switch (scan1){
+            String choice = scan.nextLine();
+
+            switch (choice) {
                 case "1":
-                    integer1.twoCounter = 0;
-                    integer1.threeCounter = 0;
-                    integer2.threeCounter = 0;
-                    integer2.twoCounter = 0;
-                    System.out.println(GCD_NOTIFICATION); // GCD Calculation
+                    System.out.println(GCD_NOTIFICATION);
+
                     System.out.println(INPUT_ONE);
-                    int scan2 = scan.nextInt();
+                    int num1 = scan.nextInt();
+                    if (num1 < 0) {
+                        System.out.println(INVALID_INPUT);
+                        break;
+                    }
+
                     System.out.println(INPUT_TWO);
-                    int scan3 = scan.nextInt();
-                    integer1.FactorFinder(scan2);
-                    integer2.FactorFinder(scan3);
-                    if (integer1.twoCounter < integer2.twoCounter) {
-                        integer2.twoCounter = integer1.twoCounter;
-                    }
-                    else {
-                        integer1.twoCounter = integer2.twoCounter;
+                    int num2 = scan.nextInt();
+                    if (num2 < 0) {
+                        System.out.println(INVALID_INPUT);
+                        break;
                     }
 
-                    if (integer1.threeCounter < integer2.threeCounter) {
-                        integer2.threeCounter = integer1.threeCounter;
-                    }
-                    else {
-                        integer1.threeCounter = integer2.threeCounter;
-                    }
-                    System.out.println(integer2.threeCounter);
-                    int GCD = integer2.GCDresult(2, integer2.twoCounter) * integer2.GCDresult(3, integer2.threeCounter);
+                    scan.nextLine();
 
-                    System.out.println(GCD_OUTPUT + GCD);
+                    int gcd = helper.calculateGCD(num1, num2);
+                    System.out.println(GCD_OUTPUT + gcd);
                     break;
+
+
                 case "2":
-                    integer1.twoCounter = 0;
-                    integer1.threeCounter = 0;
-                    integer2.threeCounter = 0;
-                    integer2.twoCounter = 0;
                     System.out.println(PF_NOTIFICATION);
                     System.out.println(INPUT_ONE);
-                    int scan4 = scan.nextInt();
-                    System.out.println(INPUT_TWO);
-                    int scan5 = scan.nextInt();
-                    integer1.FactorFinder(scan4);
-                    integer2.FactorFinder(scan5);
-                    if (integer1.twoCounter < integer2.twoCounter) {
-                        integer2.twoCounter = integer1.twoCounter;
-                    }
-                    else {
-                        integer1.twoCounter = integer2.twoCounter;
-                    }
+                    int num3 = scan.nextInt();
+                    scan.nextLine(); // Consume newline character
+                    helper.performPrimeFactorization(num3);
+                    break;
 
-                    if (integer1.threeCounter < integer2.threeCounter) {
-                        integer2.threeCounter = integer1.threeCounter;
-                    }
-                    else {
-                        integer1.threeCounter = integer2.threeCounter;
-                    }
-                    System.out.println(integer2.PFresult(2, integer2.twoCounter) + integer2.PFresult(3, integer2.threeCounter));
-                    break;
                 case "3":
-                    test = false;
+                    System.out.println(EXIT_MESSAGE);
+                    continueProgram = false;
                     break;
+
+                default:
+                    System.out.println(INVALID_MENU_SELECTION);
             }
 
-        }while (test);
-
-
-
-
-
-    } // End main
-} // End class
+        } while (continueProgram);
+    }
+}
