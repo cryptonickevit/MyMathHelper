@@ -1,7 +1,9 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
- * This class provides methods to calculate the GCD and perform prime factorization.
+ * @author Kevin Tang
+ * @version September 25, 2024
  */
 public class MyMathHelper {
     public static final String WELCOME_MESSAGE = "Welcome to My Math Helper!";
@@ -19,7 +21,7 @@ public class MyMathHelper {
     public static final String INVALID_MENU_SELECTION = "Invalid selection!";
     public static final String INVALID_INPUT = "Invalid Input - Returning to Main Menu";
 
-    // Method for finding GCD using the Euclidean algorithm
+    // Using the Euclidean algorithm for GCD
     public int calculateGCD(int num1, int num2) {
         while (num2 != 0) {
             int temp = num2;
@@ -29,27 +31,32 @@ public class MyMathHelper {
         return num1;
     }
 
-    // Method for performing prime factorization
     public void performPrimeFactorization(int number) {
-        System.out.print(PF_OUTPUT);
-        // Handle 2 as a special case
+        ArrayList<String> primeFactors = new ArrayList<String>();
         while (number % 2 == 0) {
-            System.out.print(2 + " x ");
+            primeFactors.add(Integer.toString(2));
             number /= 2;
         }
-        // Handle odd numbers
-        for (int i = 3; i <= Math.sqrt(number); i += 2) {
+        for (int i = 3; i <= number / 2; i += 2) {
             while (number % i == 0) {
-                System.out.print(i + " x ");
+                primeFactors.add(Integer.toString(i));
                 number /= i;
             }
         }
-        // If the remaining number is a prime greater than 2
         if (number > 2) {
-            System.out.print(number);
+            primeFactors.add(Integer.toString(number));
+        }
+
+
+        for (int i = 0; i < primeFactors.size(); i += 2) {
+            primeFactors.add(i, " x ");
+        }
+        for (int i = 1; i < primeFactors.size(); i++) {
+            System.out.print(primeFactors.get(i));
         }
         System.out.println();
     }
+
 
     public static void main(String[] args) {
         boolean continueProgram = true;
@@ -73,30 +80,37 @@ public class MyMathHelper {
 
                     System.out.println(INPUT_ONE);
                     int num1 = scan.nextInt();
-                    if (num1 < 0) {
+                    scan.nextLine();
+                    if (num1 <= 0) {
                         System.out.println(INVALID_INPUT);
                         break;
                     }
 
                     System.out.println(INPUT_TWO);
                     int num2 = scan.nextInt();
-                    if (num2 < 0) {
+                    scan.nextLine();
+                    if (num2 <= 0) {
                         System.out.println(INVALID_INPUT);
                         break;
                     }
 
-                    scan.nextLine();
 
                     int gcd = helper.calculateGCD(num1, num2);
                     System.out.println(GCD_OUTPUT + gcd);
                     break;
-
 
                 case "2":
                     System.out.println(PF_NOTIFICATION);
                     System.out.println(INPUT_ONE);
                     int num3 = scan.nextInt();
                     scan.nextLine(); // Consume newline character
+
+                    if (num3 < 2) {
+                        System.out.println(INVALID_INPUT);
+                        break;
+                    }
+
+                    System.out.print(PF_OUTPUT);
                     helper.performPrimeFactorization(num3);
                     break;
 
